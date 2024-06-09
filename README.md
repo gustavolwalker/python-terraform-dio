@@ -107,7 +107,6 @@ server: uvicorn
 "Hello World"
 ```
 
-
 ### Docker Compose
 
 #### Run and Test
@@ -137,4 +136,65 @@ server: uvicorn
 
 ```shell
 docker compose exec db psql -U postgres
+```
+
+## API Implement
+
+| Method | Endpoint                 | Call example                             |
+|--------| ------------------------ | -----------------------------------------|
+| GET    | localhost:8000           | http GET localhost:8000                  |
+| POST   | localhost:8000           | http POST localhost:8000 msg="Hello APP" |
+| PATCH  | localhost:8000/{task_id} | http GET localhost:8000/1 done=True      |
+
+### GET 
+Return example:
+```json
+[
+    {
+        "id": 1,
+        "msg": "Hello, dio",
+        "done": false
+    }
+]
+
+```
+
+### POST
+Body example: 
+```json
+{
+    "msg": "Hello, dio",
+}
+```
+
+Return example:
+```json
+[
+    {
+        "id": 1,
+        "msg": "Hello, dio",
+        "done": false
+    }
+]
+
+```
+
+### PATCH
+Body example: 
+```json
+{
+    "done": true,
+}
+```
+
+Return example:
+```json
+[
+    {
+        "id": 1,
+        "msg": "Hello, dio",
+        "done": true
+    }
+]
+
 ```
