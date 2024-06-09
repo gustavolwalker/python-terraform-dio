@@ -140,13 +140,19 @@ docker compose exec db psql -U postgres
 
 ## API Implement
 
-| Method | Endpoint                 | Call example                             |
-|--------| ------------------------ | -----------------------------------------|
-| GET    | localhost:8000           | http GET localhost:8000                  |
-| POST   | localhost:8000           | http POST localhost:8000 msg="Hello APP" |
-| PATCH  | localhost:8000/{task_id} | http GET localhost:8000/1 done=True      |
+| Method | Endpoint                 | Describe                     |
+|--------| ------------------------ | -----------------------------|
+| GET    | localhost:8000           | Return a list of tasks       |
+| POST   | localhost:8000           | Add a new task and return it |
+| PATCH  | localhost:8000/{task_id} | Edit a task and return it    |
 
 ### GET 
+
+Call:
+```shell
+  http GET localhost:8000 
+```
+
 Return example:
 ```json
 [
@@ -160,6 +166,12 @@ Return example:
 ```
 
 ### POST
+
+Call:
+```shell
+  http POST localhost:8000 msg="Hello APP"
+```
+
 Body example: 
 ```json
 {
@@ -180,6 +192,12 @@ Return example:
 ```
 
 ### PATCH
+
+Call:
+```shell
+  http GET localhost:8000/1 done=True 
+```
+
 Body example: 
 ```json
 {
