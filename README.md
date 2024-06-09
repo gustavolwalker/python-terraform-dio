@@ -106,3 +106,29 @@ server: uvicorn
 
 "Hello World"
 ```
+
+
+### Docker Compose
+
+#### Run and Test
+
+Run:
+```shell
+docker compose up
+```
+
+Test sample code:
+```shell
+http GET localhost:8000
+```
+
+Output test sample code:
+```shell
+HTTP/1.1 200 OK
+content-length: 13
+content-type: application/json
+date: Sat, 25 May 2024 20:53:05 GMT
+server: uvicorn
+
+"Hello, World!"
+```
