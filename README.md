@@ -125,10 +125,16 @@ http GET localhost:8000
 Output test sample code:
 ```shell
 HTTP/1.1 200 OK
-content-length: 13
+content-length: 58
 content-type: application/json
-date: Sat, 25 May 2024 20:53:05 GMT
+date: Sun, 09 Jun 2024 22:06:04 GMT
 server: uvicorn
 
-"Hello, World!"
+"UUID from Postgres: 3a229dc4-c8f5-4429-86f4-bf10e3c3f9b4"
+```
+
+#### Access database PostgreSQL
+
+```shell
+docker compose exec db psql -U postgres
 ```
