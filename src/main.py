@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Sequence
 from fastapi import FastAPI
 from pydantic import BaseModel
 from sqlmodel import Field, Session, SQLModel, create_engine, select
@@ -20,7 +20,7 @@ def run_migrations():
 
 
 @api.get("/")
-def list() -> list[Task]:
+def list() -> Sequence[Task]:
     with Session(engine) as session:
         return session.exec(select(Task)).all()
 
