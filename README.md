@@ -195,7 +195,7 @@ Return example:
 
 Call:
 ```shell
-  http GET localhost:8000/1 done=True 
+  http PATCH localhost:8000/1 done=True 
 ```
 
 Body example: 
@@ -215,4 +215,72 @@ Return example:
     }
 ]
 
+```
+
+## Deploy And Runing on AWS
+
+In this sample we using OpenTofu (Fork of Terraform)
+
+To deploy we need to inicializate and validate terraform files:
+
+```shell
+#Inicialize 
+tofu init;
+
+#Validate terraform files
+tofu validate;
+```
+
+After validate we need to explain changes, for this using comand 'plan'
+
+```shell
+#Analyse deploy 
+tofu plan;
+```
+
+After we need to apply our plan
+```shell
+#Apply deploy
+tofu apply
+```
+
+After apply we need to connect in our account and copy the public ip addres of ec2 instance and database host in RDS.
+
+Now we connect in our ec2 instance and install requirements packages
+```shell
+ssh ubuntu@<public id address ec2>;
+
+sudo apt update;
+sudo apt dist-upgrade;
+
+sudo apt install python3-fastapi python3-uvicorn python3-psycopg2 python3-sqlmodel python3-pydantic;
+
+exit;
+```
+
+After 'exit' we return to our machines and copy src files to ec2:
+```shell
+scp -r src/ ubuntu@<public id address ec2>:~/
+```
+
+Now we start our app:
+```shell
+ssh ubuntu@<public id address ec2>;
+
+sudo DATABASE_HOST=<RDS database host> python3 -m uvicorn --app-dir src/ --host 0.0.0.0 --port 80 main:api \
+```
+
+In another console it's possible to test our app:
+```shell
+http GET <public id address ec2>
+
+http POST <public id address ec2> msg="Test AWS"
+
+http PATCH <public id address ec2>/1 done=True
+```
+
+After all we need to destroy this test, first disconect from ec2 and running destroy command:
+```shell
+#Destroy deploy
+tofu destroy
 ```

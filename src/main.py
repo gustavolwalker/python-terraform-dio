@@ -1,3 +1,4 @@
+import os
 from typing import Optional, Sequence
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -11,7 +12,11 @@ class Task(SQLModel, table=True):
 
 
 api = FastAPI()
-engine = create_engine("postgresql://postgres:postgres@db:5432/postgres")
+engine = create_engine(
+    "postgresql://postgres:postgres@{database_host}:5432/postgres".format(
+        database_host=os.getenv("DATABASE_HOST")
+    )
+)
 
 
 @api.on_event("startup")
